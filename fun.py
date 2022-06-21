@@ -4,21 +4,33 @@ import pandas as pd
 
 # github.com/dword4/nhlapi
 
-api_url = "https://statsapi.web.nhl.com/api/v1/teams"
-response = requests.get(api_url)
+def not_found(error):
+	return make_response(jsonify( { 'status': 'Bad request' }), 400)
 
-json_data = response.json()
+def not_found(error):
+	return make_response(jsonify( { 'status': 'Bad request' }), 404)
 
-print(json_data['teams'][2]['teamName'])
+# call the api
+def call_api(request_link):
+	response = requests.get(request_link)
+	json_data = response.json()
 
-team_name = input("Enter team name: ")
+	return json_data
 
 
-# print(json_data)
+api_url = "https://statsapi.web.nhl.com/api/v1/people/"
+# response = requests.get(api_url)
 
-if json_data['teams'][2]['teamName'] == team_name:
-	print("true")
-else:
-	print("false")
+# json_data = response.json()
+
+json_response = call_api(api_url)
+
+print(json_response)
+
+# print(json_response['teams'][2]['teamName'])
+
+# team_name = input("Enter team name: ")
+
+
 
 # print(json.dumps(json_data))

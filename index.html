@@ -1,3 +1,16 @@
+<!--
+1 jersery
+2 islanders
+3 rangers
+4 phili
+5 penguins
+6 boston
+7 buffalo
+8 Montreal
+9 Ottawa
+10 Toronto
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +30,8 @@
 	<p id="demo"></p>
 
 	<script>
-		function loadDoc(){
+		function loadDoc(x){
+
 			var xhttp = new XMLHttpRequest();
 
 			xhttp.onreadystatechange = function(){
@@ -27,11 +41,23 @@
 					document.getElementById("demo").innerHTML = this.responseText;
 				}
 			};
-			xhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/teams/4", true);
-			xhttp.send();
+			let api_link = "https://statsapi.web.nhl.com/api/v1/teams/";
+			let result = api_link.concat(x);
+			//alert(result);
+
+			//xhttp.open("GET", result, true);
+			//xhttp.send();
+			$.getJSON('https://statsapi.web.nhl.com/api/v1/teams/1', function(results){
+				alert(results.about);
+			}
 		}
 		function print(){
-			document.getElementById("result").innerHTML = document.getElementById('fname').value;
+			let name = document.getElementById("result").innerHTML = document.getElementById('fname').value;
+
+			this.loadDoc(name);
+		}
+		function getTeamName(num){
+
 		}
 	</script>
 </body>
